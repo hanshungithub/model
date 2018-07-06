@@ -20,37 +20,24 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @Configuration
 @EnableSwagger2
 public class Swagger2 {
+
     @Bean
-
-    public Docket alipayApi() {
-
+    public Docket createRestApi() {
         return new Docket(DocumentationType.SWAGGER_2)
-
-                .groupName("模型API接口文档")
-
                 .apiInfo(apiInfo())
-
                 .select()
-
-                .apis(RequestHandlerSelectors.basePackage("cn.hassan.model"))
-
-                .paths(PathSelectors.any()).build();
-
+                .apis(RequestHandlerSelectors.basePackage("cn.hassan.model.web"))
+                .paths(PathSelectors.any())
+                .build();
     }
 
     private ApiInfo apiInfo() {
-
         return new ApiInfoBuilder()
-
                 .title("模型系统")
-
                 .description("模型信息接口")
-
-                .termsOfServiceUrl("http://ccbim.pinming.cn")
-
-                .contact(new Contact("品名网 ", "http://ccbim.pinming.cn", "hassanbox@qq.com"))
-
-                .version("1.0").build();
-
+                .termsOfServiceUrl("hassanbox@qq.com")
+                .version("1.0")
+                .build();
     }
+
 }

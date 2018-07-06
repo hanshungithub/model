@@ -2,12 +2,14 @@ package cn.hassan.model.web;
 
 import cn.hassan.model.bean.User;
 import cn.hassan.model.service.UserService;
-import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * Created with IntelliJ IDEA.
@@ -15,17 +17,18 @@ import org.springframework.web.bind.annotation.GetMapping;
  * Date: 2018/7/6 21:51
  * Description:
  */
-@Api("模型接口")
-@Controller
+@RestController
 public class UserController {
 
     @Autowired
     private UserService service;
 
-    @ApiOperation(value="获取模型详细信息")
-    @ApiImplicitParam(name = "ID", value = "用户ID", required = true, dataType = "Integer")
-    @GetMapping("/user/finduser")
-    public User findUserById(Integer id) {
+    @ApiOperation(value="获取模型详细信息", notes="根据url的id来指定更新对象，根据传过来的user信息来更新用户详细信息")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "id", value = "用户ID", required = true, dataType = "Long", paramType = "path")
+    })
+    @RequestMapping(value="/user/finduser/{id}", method=RequestMethod.GET)
+    public User findUserById(@PathVariable Integer id) {
         return service.findUserById(id);
     }
 }
