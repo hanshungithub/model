@@ -6,9 +6,9 @@ package cn.hassan.model.exception;
  * Date: 2018/7/6 21:51
  * Description:
  */
-public class MyException extends Exception {
+public class BoException extends Exception {
 
-    public MyException(String message) {
+    public BoException(String message) {
         super(message);
     }
 

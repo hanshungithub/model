@@ -12,6 +12,9 @@ import javax.servlet.http.HttpServletRequest;
 @ControllerAdvice
 public class GlobalExceptionHandler {
 
+    /**
+     * 全局异常捕捉处理
+     */
     @ExceptionHandler(value = Exception.class)
     public ModelAndView defaultErrorHandler(HttpServletRequest req, Exception e) throws Exception {
         ModelAndView mav = new ModelAndView();
@@ -21,9 +24,12 @@ public class GlobalExceptionHandler {
         return mav;
     }
 
-    @ExceptionHandler(value = MyException.class)
+    /**
+     * 拦截捕捉自定义异常 BoException.class
+     */
+    @ExceptionHandler(value = BoException.class)
     @ResponseBody
-    public ErrorInfo<String> jsonErrorHandler(HttpServletRequest req, MyException e) throws Exception {
+    public ErrorInfo<String> jsonErrorHandler(HttpServletRequest req, BoException e) throws Exception {
         ErrorInfo<String> r = new ErrorInfo<>();
         r.setMessage(e.getMessage());
         r.setCode(ErrorInfo.ERROR);

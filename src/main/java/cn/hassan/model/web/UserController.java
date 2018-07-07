@@ -1,6 +1,7 @@
 package cn.hassan.model.web;
 
 import cn.hassan.model.bean.User;
+import cn.hassan.model.exception.BoException;
 import cn.hassan.model.service.UserService;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -36,5 +37,11 @@ public class UserController {
     @RequestMapping(value = "/hello",method = RequestMethod.GET)
     public String hello() throws Exception {
         throw new Exception("发生错误");
+    }
+
+    @ApiOperation(value="异常测试类2")
+    @RequestMapping(value="/json",method = RequestMethod.GET)
+    public String json() throws BoException {
+        throw new BoException("发生错误2");
     }
 }
