@@ -31,4 +31,10 @@ public class UserController {
     public User findUserById(@PathVariable Integer id) {
         return service.findUserById(id);
     }
+
+    @ApiOperation(value="异常测试类")
+    @RequestMapping(value = "/hello",method = RequestMethod.GET)
+    public String hello() throws Exception {
+        throw new Exception("发生错误");
+    }
 }
