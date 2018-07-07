@@ -1,4 +1,4 @@
-package cn.hassan.model.configs;
+package cn.hassan.model.configs.swagger;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
