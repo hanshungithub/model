@@ -2,6 +2,8 @@ package cn.hassan.model.web;
 
 import cn.hassan.model.bean.User;
 import cn.hassan.model.exception.BoException;
+import cn.hassan.model.jms.MessageProducer;
+import cn.hassan.model.jms.enums.DestinationEnums;
 import cn.hassan.model.service.UserService;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -28,6 +30,9 @@ public class UserController {
     @Autowired
     private RedisTemplate<String, String> redisTemplate;
 
+    @Autowired
+    private MessageProducer producer;
+
     @ApiOperation(value="获取模型详细信息", notes="根据url的id来指定更新对象，根据传过来的user信息来更新用户详细信息")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "id", value = "用户ID", required = true, dataType = "Long", paramType = "path")
@@ -53,5 +58,11 @@ public class UserController {
     @RequestMapping(value="/redis/{name}",method = RequestMethod.GET)
     public void setRedis(@PathVariable String name) {
         redisTemplate.opsForValue().set("name",name);
+    }
+
+    @ApiOperation(value="mq测试类")
+    @RequestMapping(value="/mq",method = RequestMethod.GET)
+    public void mqTest() {
+        producer.send("hassan",DestinationEnums.SEND_USER_DESTINATION.value());
     }
 }
