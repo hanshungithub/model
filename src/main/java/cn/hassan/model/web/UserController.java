@@ -7,6 +7,7 @@ import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -23,6 +24,9 @@ public class UserController {
 
     @Autowired
     private UserService service;
+
+    @Autowired
+    private RedisTemplate<String, String> redisTemplate;
 
     @ApiOperation(value="获取模型详细信息", notes="根据url的id来指定更新对象，根据传过来的user信息来更新用户详细信息")
     @ApiImplicitParams({
@@ -43,5 +47,11 @@ public class UserController {
     @RequestMapping(value="/json",method = RequestMethod.GET)
     public String json() throws BoException {
         throw new BoException("发生错误2");
+    }
+
+    @ApiOperation(value="redis测试类")
+    @RequestMapping(value="/redis/{name}",method = RequestMethod.GET)
+    public void setRedis(@PathVariable String name) {
+        redisTemplate.opsForValue().set("name",name);
     }
 }
