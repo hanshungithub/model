@@ -8,7 +8,8 @@ package cn.hassan.model.Interfaces.constant;
  */
 public enum InfParamEnum {
 	
-	itype	  ("itype","接口类型", Integer.class)
+	itype	  ("itype","接口类型", Integer.class),
+	sign	  ("sign","请求签名",String.class)
 	;
 
 	private InfParamEnum(String paramValue, String paramMsg, Class<?> clazz){
