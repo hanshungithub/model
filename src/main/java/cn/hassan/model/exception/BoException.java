@@ -6,10 +6,32 @@ package cn.hassan.model.exception;
  * Date: 2018/7/6 21:51
  * Description:
  */
-public class BoException extends Exception {
+public class BoException extends BaseRuntimeException {
 
-    public BoException(String message) {
-        super(message);
-    }
+	/**
+	 *
+	 * BOExceptionEnum构造业务层异常
+	 *
+	 * @param en
+	 */
+	public BoException(BOExceptionEnum en) {
+		super(en.errorCode(), en.errorMsg());
+	}
 
+
+	public BoException(String errorMsg) {
+		super("", errorMsg);
+	}
+
+	/**
+	 * 抛出BOException异常
+	 *
+	 * @Description
+	 * @param en
+	 *            异常枚举
+	 *
+	 */
+	public static void throwz(BOExceptionEnum en) {
+		throw new BoException(en);
+	}
 }

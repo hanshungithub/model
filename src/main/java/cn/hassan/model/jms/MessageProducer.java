@@ -5,6 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jms.core.JmsMessagingTemplate;
 import org.springframework.stereotype.Component;
 
+import javax.jms.Destination;
+
 /**
  * Created with IntelliJ IDEA.
  * Author: hassan
@@ -23,7 +25,7 @@ public class MessageProducer {
 	 * @param t 待发送的消息
 	 */
     public <T> void send(T t, String queue) {
-        ActiveMQQueue destination = new ActiveMQQueue(queue);
+		Destination destination = new ActiveMQQueue(queue);
         jmsMessagingTemplate.convertAndSend(destination, t);
     }
 }
