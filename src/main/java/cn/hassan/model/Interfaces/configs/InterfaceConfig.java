@@ -10,6 +10,6 @@ import org.springframework.context.annotation.ImportResource;
  * Description: 手机端接口配置类
  */
 @Configuration
-@ImportResource(locations = "classpath:interface-context.xml")
+@ImportResource(locations = "classpath:spring/interface-context.xml")
 public class InterfaceConfig {
 }
