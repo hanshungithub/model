@@ -9,6 +9,7 @@ import cn.hassan.model.common.utils.StringUtil;
 import cn.hassan.model.common.utils.ZipUtils;
 import cn.hassan.model.exception.BOExceptionEnum;
 import cn.hassan.model.exception.BoException;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,11 +24,11 @@ import java.util.Map;
  *
  */
 @Component
+@Slf4j
 public class InterfaceContext {
-	protected Log log = LogFactory.getLog(this.getClass()); 			//日志对象
+
 	@Autowired
 	private StrategyFactory strategyFactory;
-	private String isTest;												//是否测试  true:测试，服务端开发调试接口室，不压缩,不校验签名
 
 	public IStrategy getStrategyInterface(Integer itype){
 		return strategyFactory.create(itype);
@@ -160,22 +161,4 @@ public class InterfaceContext {
 
 		return sArray[0];
 	}
-
-	public StrategyFactory getStrategyFactory() {
-		return strategyFactory;
-	}
-
-	public void setStrategyFactory(StrategyFactory strategyFactory) {
-		this.strategyFactory = strategyFactory;
-	}
-
-	public String getIsTest() {
-		return isTest;
-	}
-
-	public void setIsTest(String isTest) {
-		this.isTest = isTest;
-	}
-
-
 }

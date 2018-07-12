@@ -24,13 +24,13 @@ public class InterfaceController {
 	/**
 	 * 接口入口
 	 */
-	@RequestMapping("/test")
-	public String gateWay() {
+	@RequestMapping("/gateWay")
+	public String gateWay(String s) {
 		StringBuilder str=new  StringBuilder();
 		str.append("itype="+1000+"&");
-		str.append("sign="+"hassan");
-		String s= ZipUtils.gzip(str.toString());
-		String encode = URLEncodeUtil.encode(s);
+		str.append("sign=").append(s);
+		String string= ZipUtils.gzip(str.toString());
+		String encode = URLEncodeUtil.encode(string);
 		Map<String, String[]> map = context.doInterfaceParam(encode);
 		String dispose = context.dispose(map);
 		return dispose;
