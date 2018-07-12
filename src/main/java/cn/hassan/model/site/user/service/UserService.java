@@ -1,7 +1,7 @@
-package cn.hassan.model.service;
+package cn.hassan.model.site.user.service;
 
-import cn.hassan.model.bean.User;
-import cn.hassan.model.mapper.UserMapper;
+import cn.hassan.model.site.user.bean.User;
+import cn.hassan.model.site.user.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -26,7 +26,7 @@
         </javaTypeResolver>
 
         <!--指定javaBean生成的位置 javaBean生成的位置-->
-        <javaModelGenerator targetPackage="cn.hassan.model.bean" targetProject="./src/main/java">
+        <javaModelGenerator targetPackage="cn.hassan.model.site.user.bean" targetProject="./src/main/java">
             <property name="enableSubPackages" value="true"/>
             <property name="trimStrings" value="true"/>
         </javaModelGenerator>
@@ -37,7 +37,7 @@
         </sqlMapGenerator>
 
         <!--指定dao接口生成的位置-->
-        <javaClientGenerator type="XMLMAPPER" targetPackage="cn.hassan.model.mapper" targetProject="./src/main/java">
+        <javaClientGenerator type="XMLMAPPER" targetPackage="cn.hassan.model.site.user.mapper" targetProject="./src/main/java">
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
 

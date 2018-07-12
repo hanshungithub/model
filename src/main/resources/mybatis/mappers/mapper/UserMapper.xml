@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="cn.hassan.model.mapper.UserMapper" >
-  <resultMap id="BaseResultMap" type="cn.hassan.model.bean.User" >
+<mapper namespace="cn.hassan.model.site.user.mapper.UserMapper" >
+  <resultMap id="BaseResultMap" type="cn.hassan.model.site.user.bean.User" >
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="passward" property="passward" jdbcType="VARCHAR" />
     <result column="username" property="username" jdbcType="VARCHAR" />
@@ -70,7 +70,7 @@
   <sql id="Base_Column_List" >
     id, passward, username, birthday, sex, address
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.hassan.model.bean.UserExample" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.hassan.model.site.user.bean.UserExample" >
     select
     <if test="distinct" >
       distinct
@@ -95,13 +95,13 @@
     delete from user
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="cn.hassan.model.bean.UserExample" >
+  <delete id="deleteByExample" parameterType="cn.hassan.model.site.user.bean.UserExample" >
     delete from user
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="cn.hassan.model.bean.User" >
+  <insert id="insert" parameterType="cn.hassan.model.site.user.bean.User" >
     <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
       SELECT LAST_INSERT_ID()
     </selectKey>
@@ -110,7 +110,7 @@
     values (#{passward,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, #{birthday,jdbcType=DATE}, 
       #{sex,jdbcType=CHAR}, #{address,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="cn.hassan.model.bean.User" >
+  <insert id="insertSelective" parameterType="cn.hassan.model.site.user.bean.User" >
     <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
       SELECT LAST_INSERT_ID()
     </selectKey>
@@ -150,7 +150,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="cn.hassan.model.bean.UserExample" resultType="java.lang.Integer" >
+  <select id="countByExample" parameterType="cn.hassan.model.site.user.bean.UserExample" resultType="java.lang.Integer" >
     select count(*) from user
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
@@ -194,7 +194,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="cn.hassan.model.bean.User" >
+  <update id="updateByPrimaryKeySelective" parameterType="cn.hassan.model.site.user.bean.User" >
     update user
     <set >
       <if test="passward != null" >
@@ -215,7 +215,7 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="cn.hassan.model.bean.User" >
+  <update id="updateByPrimaryKey" parameterType="cn.hassan.model.site.user.bean.User" >
     update user
     set passward = #{passward,jdbcType=VARCHAR},
       username = #{username,jdbcType=VARCHAR},

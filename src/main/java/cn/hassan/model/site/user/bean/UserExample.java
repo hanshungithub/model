@@ -1,4 +1,4 @@
-package cn.hassan.model.bean;
+package cn.hassan.model.site.user.bean;
 
 import java.util.ArrayList;
 import java.util.Date;

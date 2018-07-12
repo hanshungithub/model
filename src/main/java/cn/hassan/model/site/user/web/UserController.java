@@ -1,10 +1,10 @@
-package cn.hassan.model.web;
+package cn.hassan.model.site.user.web;
 
-import cn.hassan.model.bean.User;
 import cn.hassan.model.exception.BoException;
 import cn.hassan.model.jms.MessageProducer;
 import cn.hassan.model.jms.enums.DestinationEnums;
-import cn.hassan.model.service.UserService;
+import cn.hassan.model.site.user.bean.User;
+import cn.hassan.model.site.user.service.UserService;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
