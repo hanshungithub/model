@@ -1,4 +1,4 @@
-package cn.hassan.model.site.user.web;
+package cn.hassan.model.site.web;
 
 import cn.hassan.model.exception.BoException;
 import cn.hassan.model.jms.MessageProducer;
