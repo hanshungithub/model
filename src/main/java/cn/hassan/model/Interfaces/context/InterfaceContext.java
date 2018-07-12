@@ -11,6 +11,8 @@ import cn.hassan.model.exception.BOExceptionEnum;
 import cn.hassan.model.exception.BoException;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -20,9 +22,10 @@ import java.util.Map;
  * 接口上下文
  *
  */
+@Component
 public class InterfaceContext {
 	protected Log log = LogFactory.getLog(this.getClass()); 			//日志对象
-
+	@Autowired
 	private StrategyFactory strategyFactory;
 	private String isTest;												//是否测试  true:测试，服务端开发调试接口室，不压缩,不校验签名
 
@@ -36,10 +39,6 @@ public class InterfaceContext {
 	 * @return
 	 */
 	public String dispose(Map<String,String[]> map){
-
-
-
-
 		//指定接口编码，调用策略工厂生成具体策略实体处理业务
 		Integer itype =new Integer(map.get("itype")[0]);
 		IStrategy strategy = strategyFactory.create(itype);
@@ -72,7 +71,7 @@ public class InterfaceContext {
 		}
 
 		//安全性校验
-		safeValid(map,sInfParam);
+		//safeValid(map,sInfParam);
 
 		return map;
 	}
