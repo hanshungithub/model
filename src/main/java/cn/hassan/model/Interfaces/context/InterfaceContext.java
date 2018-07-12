@@ -58,8 +58,6 @@ public class InterfaceContext {
 
 		//解压
  		String s = ZipUtils.gunzip(sParam);
-// 		String s = sParam;
-
 		//组装Map
 		Map<String,String[]> map = ParameterUtil.toMapArray(s);
 
