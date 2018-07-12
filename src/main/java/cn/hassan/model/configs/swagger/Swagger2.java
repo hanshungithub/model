@@ -26,7 +26,7 @@ public class Swagger2 {
         return new Docket(DocumentationType.SWAGGER_2)
                 .apiInfo(apiInfo())
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("cn.hassan.model.site.user.web"))
+                .apis(RequestHandlerSelectors.basePackage("cn.hassan.model.site.*.web"))
                 .paths(PathSelectors.any())
                 .build();
     }
