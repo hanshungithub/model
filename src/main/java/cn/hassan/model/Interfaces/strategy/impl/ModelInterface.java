@@ -2,6 +2,10 @@ package cn.hassan.model.Interfaces.strategy.impl;
 
 import cn.hassan.model.Interfaces.constant.InfParamEnum;
 import cn.hassan.model.Interfaces.strategy.IStrategy;
+import cn.hassan.model.site.bimmodel.query.BimfileQuery;
+import cn.hassan.model.site.bimmodel.service.BimfileService;
+import cn.hassan.model.site.bimmodel.vo.FileConvertResultWithSize;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.Map;
@@ -14,13 +18,20 @@ import java.util.Map;
  */
 @Component(value = "modelInterface")
 public class ModelInterface extends IStrategy {
+
+    @Autowired
+    private BimfileService bimfileService;
+
 	@Override
 	public String dispose(Map<String, String[]> map) {
 		return null;
 	}
 
 	public String modelInfo(Map<String, String[]> map) {
-		String mapValue = getMapValue(map, InfParamEnum.sign);
-		return "hello" + mapValue;
+		String fileId = getMapValue(map, InfParamEnum.fileId);
+        BimfileQuery query = new BimfileQuery();
+        query.setFileId(fileId);
+        FileConvertResultWithSize result = bimfileService.bimfileConvertWithSize(query);
+        return buildObjectToJson(result);
 	}
 }
