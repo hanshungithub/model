@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.hassan.model.site.bimmodel.mapper.FileConvertTaskMapper">
+    <!--修改-->
+    <update id="updateFileConvertTask" parameterType="cn.hassan.model.site.bimmodel.entity.CloudFileConvertTask">
+        update FILE_CONVERTTASK
+        <set>
+            <if test="fileID != null">
+                FileID = #{fileID,jdbcType=CHAR},
+            </if>
+            <if test="fileName != null">
+                FileName = #{fileName,jdbcType=VARCHAR},
+            </if>
+            <if test="fileTypeId != null">
+                FileTypeId = #{fileTypeId,jdbcType=INTEGER},
+            </if>
+            <if test="fileBucket != null">
+                FileBucket = #{fileBucket,jdbcType=VARCHAR},
+            </if>
+            <if test="fileKey != null">
+                FileKey = #{fileKey,jdbcType=VARCHAR},
+            </if>
+            <if test="fileSize != null">
+                FileSize = #{fileSize,jdbcType=BIGINT},
+            </if>
+            <if test="fileMd5 != null">
+                FileMd5 = #{fileMd5,jdbcType=VARCHAR},
+            </if>
+            <if test="addTime != null">
+                AddTime = #{addTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="addUser != null">
+                AddUser = #{addUser,jdbcType=VARCHAR},
+            </if>
+            <if test="zipFileMd5 != null">
+                ZipFileMd5 = #{zipFileMd5,jdbcType=VARCHAR},
+            </if>
+            <if test="isZip != null">
+                IsZip = #{isZip,jdbcType=INTEGER},
+            </if>
+            <if test="fileExtension != null">
+                FileExtension = #{fileExtension,jdbcType=VARCHAR},
+            </if>
+            <if test="startHandleTime != null">
+                StartHandleTime = #{startHandleTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="totalTimeElapsed != null">
+                TotalTimeElapsed = #{totalTimeElapsed,jdbcType=BIGINT},
+            </if>
+            <if test="downloadTimeElapsed != null">
+                DownloadTimeElapsed = #{downloadTimeElapsed,jdbcType=BIGINT},
+            </if>
+            <if test="convertTimeElapsed != null">
+                ConvertTimeElapsed = #{convertTimeElapsed,jdbcType=BIGINT},
+            </if>
+            <if test="uploadTimeElapsed != null">
+                UploadTimeElapsed = #{uploadTimeElapsed,jdbcType=BIGINT},
+            </if>
+            <if test="workType != null">
+                WorkType = #{workType,jdbcType=INTEGER},
+            </if>
+            <if test="convertStatus != null">
+                ConvertStatus = #{convertStatus,jdbcType=INTEGER},
+            </if>
+            <if test="convertResultDesc != null">
+                ConvertResultDesc = #{convertResultDesc,jdbcType=VARCHAR},
+            </if>
+            <if test="taskEnabled != null">
+                TaskEnabled = #{taskEnabled,jdbcType=INTEGER},
+            </if>
+            <if test="taskPriorityLevel != null">
+                TaskPriorityLevel = #{taskPriorityLevel,jdbcType=INTEGER},
+            </if>
+        </set>
+        where TaskId = #{taskId,jdbcType=BIGINT}
+    </update>
+    <!--查询一条记录-->
+    <select id="findOne" parameterType="cn.hassan.model.site.bimmodel.entity.CloudFileConvertTask" resultType="cn.hassan.model.site.bimmodel.entity.CloudFileConvertTask">
+        SELECT
+        a.TaskId,
+        a.FileID,
+        a.FileName,
+        a.FileTypeId,
+        a.FileBucket,
+        a.FileKey,
+        a.FileSize,
+        a.FileMd5,
+        a.AddTime,
+        a.AddUser,
+        a.ZipFileMd5,
+        a.IsZip,
+        a.FileExtension,
+        a.StartHandleTime,
+        a.TotalTimeElapsed,
+        a.DownloadTimeElapsed,
+        a.ConvertTimeElapsed,
+        a.UploadTimeElapsed,
+        a.WorkType,
+        a.ConvertStatus,
+        a.ConvertResultDesc,
+        a.TaskEnabled,
+        a.TaskPriorityLevel
+        FROM
+        FILE_CONVERTTASK a
+        where
+        FileID = #{fileID,jdbcType=CHAR}
+        and ConvertStatus == 0
+        limit 1
+    </select>
+</mapper>

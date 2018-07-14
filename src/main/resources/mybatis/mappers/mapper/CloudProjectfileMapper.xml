@@ -1,0 +1,358 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.hassan.model.site.bimmodel.mapper.CloudProjectfileMapper">
+  <resultMap id="BaseResultMap" type="cn.hassan.model.site.bimmodel.entity.CloudProjectfile">
+    <id column="FileID" jdbcType="CHAR" property="fileid" />
+    <result column="LinkFileID" jdbcType="CHAR" property="linkfileid" />
+    <result column="RevisionId" jdbcType="CHAR" property="revisionid" />
+    <result column="FileName" jdbcType="VARCHAR" property="filename" />
+    <result column="FileTypeId" jdbcType="INTEGER" property="filetypeid" />
+    <result column="FileShareType" jdbcType="INTEGER" property="filesharetype" />
+    <result column="FileBucket" jdbcType="VARCHAR" property="filebucket" />
+    <result column="FileKey" jdbcType="VARCHAR" property="filekey" />
+    <result column="FileSize" jdbcType="BIGINT" property="filesize" />
+    <result column="FileMd5" jdbcType="VARCHAR" property="filemd5" />
+    <result column="AddTime" jdbcType="TIMESTAMP" property="addtime" />
+    <result column="AddUser" jdbcType="VARCHAR" property="adduser" />
+    <result column="ZipFileMd5" jdbcType="VARCHAR" property="zipfilemd5" />
+    <result column="IsZip" jdbcType="INTEGER" property="iszip" />
+    <result column="UploadStatus" jdbcType="INTEGER" property="uploadstatus" />
+    <result column="FileExtension" jdbcType="VARCHAR" property="fileextension" />
+    <result column="WorkType" jdbcType="INTEGER" property="worktype" />
+    <result column="ConvertStatus" jdbcType="INTEGER" property="convertstatus" />
+    <result column="ConvertResultDesc" jdbcType="VARCHAR" property="convertresultdesc" />
+    <result column="TaskEnabled" jdbcType="INTEGER" property="taskenabled" />
+    <result column="RecycleStatus" jdbcType="INTEGER" property="recyclestatus" />
+    <result column="RecycleBatch" jdbcType="TIMESTAMP" property="recyclebatch" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="cn.hassan.model.site.bimmodel.entity.CloudProjectfile">
+    <result column="FilePath" jdbcType="LONGVARCHAR" property="filepath" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    FileID, LinkFileID, RevisionId, FileName, FileTypeId, FileShareType, FileBucket, 
+    FileKey, FileSize, FileMd5, AddTime, AddUser, ZipFileMd5, IsZip, UploadStatus, FileExtension, 
+    WorkType, ConvertStatus, ConvertResultDesc, TaskEnabled, RecycleStatus, RecycleBatch
+  </sql>
+  <sql id="Blob_Column_List">
+    FilePath
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from cloud_projectfile
+    where FileID = #{fileid,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from cloud_projectfile
+    where FileID = #{fileid,jdbcType=CHAR}
+  </delete>
+  <insert id="insert" parameterType="cn.hassan.model.site.bimmodel.entity.CloudProjectfile">
+    insert into cloud_projectfile (FileID, LinkFileID, RevisionId, 
+      FileName, FileTypeId, FileShareType, 
+      FileBucket, FileKey, FileSize, 
+      FileMd5, AddTime, AddUser, 
+      ZipFileMd5, IsZip, UploadStatus, 
+      FileExtension, WorkType, ConvertStatus, 
+      ConvertResultDesc, TaskEnabled, RecycleStatus, 
+      RecycleBatch, FilePath)
+    values (#{fileid,jdbcType=CHAR}, #{linkfileid,jdbcType=CHAR}, #{revisionid,jdbcType=CHAR}, 
+      #{filename,jdbcType=VARCHAR}, #{filetypeid,jdbcType=INTEGER}, #{filesharetype,jdbcType=INTEGER}, 
+      #{filebucket,jdbcType=VARCHAR}, #{filekey,jdbcType=VARCHAR}, #{filesize,jdbcType=BIGINT}, 
+      #{filemd5,jdbcType=VARCHAR}, #{addtime,jdbcType=TIMESTAMP}, #{adduser,jdbcType=VARCHAR}, 
+      #{zipfilemd5,jdbcType=VARCHAR}, #{iszip,jdbcType=INTEGER}, #{uploadstatus,jdbcType=INTEGER}, 
+      #{fileextension,jdbcType=VARCHAR}, #{worktype,jdbcType=INTEGER}, #{convertstatus,jdbcType=INTEGER}, 
+      #{convertresultdesc,jdbcType=VARCHAR}, #{taskenabled,jdbcType=INTEGER}, #{recyclestatus,jdbcType=INTEGER}, 
+      #{recyclebatch,jdbcType=TIMESTAMP}, #{filepath,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.hassan.model.site.bimmodel.entity.CloudProjectfile">
+    insert into cloud_projectfile
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="fileid != null">
+        FileID,
+      </if>
+      <if test="linkfileid != null">
+        LinkFileID,
+      </if>
+      <if test="revisionid != null">
+        RevisionId,
+      </if>
+      <if test="filename != null">
+        FileName,
+      </if>
+      <if test="filetypeid != null">
+        FileTypeId,
+      </if>
+      <if test="filesharetype != null">
+        FileShareType,
+      </if>
+      <if test="filebucket != null">
+        FileBucket,
+      </if>
+      <if test="filekey != null">
+        FileKey,
+      </if>
+      <if test="filesize != null">
+        FileSize,
+      </if>
+      <if test="filemd5 != null">
+        FileMd5,
+      </if>
+      <if test="addtime != null">
+        AddTime,
+      </if>
+      <if test="adduser != null">
+        AddUser,
+      </if>
+      <if test="zipfilemd5 != null">
+        ZipFileMd5,
+      </if>
+      <if test="iszip != null">
+        IsZip,
+      </if>
+      <if test="uploadstatus != null">
+        UploadStatus,
+      </if>
+      <if test="fileextension != null">
+        FileExtension,
+      </if>
+      <if test="worktype != null">
+        WorkType,
+      </if>
+      <if test="convertstatus != null">
+        ConvertStatus,
+      </if>
+      <if test="convertresultdesc != null">
+        ConvertResultDesc,
+      </if>
+      <if test="taskenabled != null">
+        TaskEnabled,
+      </if>
+      <if test="recyclestatus != null">
+        RecycleStatus,
+      </if>
+      <if test="recyclebatch != null">
+        RecycleBatch,
+      </if>
+      <if test="filepath != null">
+        FilePath,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="fileid != null">
+        #{fileid,jdbcType=CHAR},
+      </if>
+      <if test="linkfileid != null">
+        #{linkfileid,jdbcType=CHAR},
+      </if>
+      <if test="revisionid != null">
+        #{revisionid,jdbcType=CHAR},
+      </if>
+      <if test="filename != null">
+        #{filename,jdbcType=VARCHAR},
+      </if>
+      <if test="filetypeid != null">
+        #{filetypeid,jdbcType=INTEGER},
+      </if>
+      <if test="filesharetype != null">
+        #{filesharetype,jdbcType=INTEGER},
+      </if>
+      <if test="filebucket != null">
+        #{filebucket,jdbcType=VARCHAR},
+      </if>
+      <if test="filekey != null">
+        #{filekey,jdbcType=VARCHAR},
+      </if>
+      <if test="filesize != null">
+        #{filesize,jdbcType=BIGINT},
+      </if>
+      <if test="filemd5 != null">
+        #{filemd5,jdbcType=VARCHAR},
+      </if>
+      <if test="addtime != null">
+        #{addtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="adduser != null">
+        #{adduser,jdbcType=VARCHAR},
+      </if>
+      <if test="zipfilemd5 != null">
+        #{zipfilemd5,jdbcType=VARCHAR},
+      </if>
+      <if test="iszip != null">
+        #{iszip,jdbcType=INTEGER},
+      </if>
+      <if test="uploadstatus != null">
+        #{uploadstatus,jdbcType=INTEGER},
+      </if>
+      <if test="fileextension != null">
+        #{fileextension,jdbcType=VARCHAR},
+      </if>
+      <if test="worktype != null">
+        #{worktype,jdbcType=INTEGER},
+      </if>
+      <if test="convertstatus != null">
+        #{convertstatus,jdbcType=INTEGER},
+      </if>
+      <if test="convertresultdesc != null">
+        #{convertresultdesc,jdbcType=VARCHAR},
+      </if>
+      <if test="taskenabled != null">
+        #{taskenabled,jdbcType=INTEGER},
+      </if>
+      <if test="recyclestatus != null">
+        #{recyclestatus,jdbcType=INTEGER},
+      </if>
+      <if test="recyclebatch != null">
+        #{recyclebatch,jdbcType=TIMESTAMP},
+      </if>
+      <if test="filepath != null">
+        #{filepath,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.hassan.model.site.bimmodel.entity.CloudProjectfile">
+    update cloud_projectfile
+    <set>
+      <if test="linkfileid != null">
+        LinkFileID = #{linkfileid,jdbcType=CHAR},
+      </if>
+      <if test="revisionid != null">
+        RevisionId = #{revisionid,jdbcType=CHAR},
+      </if>
+      <if test="filename != null">
+        FileName = #{filename,jdbcType=VARCHAR},
+      </if>
+      <if test="filetypeid != null">
+        FileTypeId = #{filetypeid,jdbcType=INTEGER},
+      </if>
+      <if test="filesharetype != null">
+        FileShareType = #{filesharetype,jdbcType=INTEGER},
+      </if>
+      <if test="filebucket != null">
+        FileBucket = #{filebucket,jdbcType=VARCHAR},
+      </if>
+      <if test="filekey != null">
+        FileKey = #{filekey,jdbcType=VARCHAR},
+      </if>
+      <if test="filesize != null">
+        FileSize = #{filesize,jdbcType=BIGINT},
+      </if>
+      <if test="filemd5 != null">
+        FileMd5 = #{filemd5,jdbcType=VARCHAR},
+      </if>
+      <if test="addtime != null">
+        AddTime = #{addtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="adduser != null">
+        AddUser = #{adduser,jdbcType=VARCHAR},
+      </if>
+      <if test="zipfilemd5 != null">
+        ZipFileMd5 = #{zipfilemd5,jdbcType=VARCHAR},
+      </if>
+      <if test="iszip != null">
+        IsZip = #{iszip,jdbcType=INTEGER},
+      </if>
+      <if test="uploadstatus != null">
+        UploadStatus = #{uploadstatus,jdbcType=INTEGER},
+      </if>
+      <if test="fileextension != null">
+        FileExtension = #{fileextension,jdbcType=VARCHAR},
+      </if>
+      <if test="worktype != null">
+        WorkType = #{worktype,jdbcType=INTEGER},
+      </if>
+      <if test="convertstatus != null">
+        ConvertStatus = #{convertstatus,jdbcType=INTEGER},
+      </if>
+      <if test="convertresultdesc != null">
+        ConvertResultDesc = #{convertresultdesc,jdbcType=VARCHAR},
+      </if>
+      <if test="taskenabled != null">
+        TaskEnabled = #{taskenabled,jdbcType=INTEGER},
+      </if>
+      <if test="recyclestatus != null">
+        RecycleStatus = #{recyclestatus,jdbcType=INTEGER},
+      </if>
+      <if test="recyclebatch != null">
+        RecycleBatch = #{recyclebatch,jdbcType=TIMESTAMP},
+      </if>
+      <if test="filepath != null">
+        FilePath = #{filepath,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where FileID = #{fileid,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="cn.hassan.model.site.bimmodel.entity.CloudProjectfile">
+    update cloud_projectfile
+    set LinkFileID = #{linkfileid,jdbcType=CHAR},
+      RevisionId = #{revisionid,jdbcType=CHAR},
+      FileName = #{filename,jdbcType=VARCHAR},
+      FileTypeId = #{filetypeid,jdbcType=INTEGER},
+      FileShareType = #{filesharetype,jdbcType=INTEGER},
+      FileBucket = #{filebucket,jdbcType=VARCHAR},
+      FileKey = #{filekey,jdbcType=VARCHAR},
+      FileSize = #{filesize,jdbcType=BIGINT},
+      FileMd5 = #{filemd5,jdbcType=VARCHAR},
+      AddTime = #{addtime,jdbcType=TIMESTAMP},
+      AddUser = #{adduser,jdbcType=VARCHAR},
+      ZipFileMd5 = #{zipfilemd5,jdbcType=VARCHAR},
+      IsZip = #{iszip,jdbcType=INTEGER},
+      UploadStatus = #{uploadstatus,jdbcType=INTEGER},
+      FileExtension = #{fileextension,jdbcType=VARCHAR},
+      WorkType = #{worktype,jdbcType=INTEGER},
+      ConvertStatus = #{convertstatus,jdbcType=INTEGER},
+      ConvertResultDesc = #{convertresultdesc,jdbcType=VARCHAR},
+      TaskEnabled = #{taskenabled,jdbcType=INTEGER},
+      RecycleStatus = #{recyclestatus,jdbcType=INTEGER},
+      RecycleBatch = #{recyclebatch,jdbcType=TIMESTAMP},
+      FilePath = #{filepath,jdbcType=LONGVARCHAR}
+    where FileID = #{fileid,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.hassan.model.site.bimmodel.entity.CloudProjectfile">
+    update cloud_projectfile
+    set LinkFileID = #{linkfileid,jdbcType=CHAR},
+      RevisionId = #{revisionid,jdbcType=CHAR},
+      FileName = #{filename,jdbcType=VARCHAR},
+      FileTypeId = #{filetypeid,jdbcType=INTEGER},
+      FileShareType = #{filesharetype,jdbcType=INTEGER},
+      FileBucket = #{filebucket,jdbcType=VARCHAR},
+      FileKey = #{filekey,jdbcType=VARCHAR},
+      FileSize = #{filesize,jdbcType=BIGINT},
+      FileMd5 = #{filemd5,jdbcType=VARCHAR},
+      AddTime = #{addtime,jdbcType=TIMESTAMP},
+      AddUser = #{adduser,jdbcType=VARCHAR},
+      ZipFileMd5 = #{zipfilemd5,jdbcType=VARCHAR},
+      IsZip = #{iszip,jdbcType=INTEGER},
+      UploadStatus = #{uploadstatus,jdbcType=INTEGER},
+      FileExtension = #{fileextension,jdbcType=VARCHAR},
+      WorkType = #{worktype,jdbcType=INTEGER},
+      ConvertStatus = #{convertstatus,jdbcType=INTEGER},
+      ConvertResultDesc = #{convertresultdesc,jdbcType=VARCHAR},
+      TaskEnabled = #{taskenabled,jdbcType=INTEGER},
+      RecycleStatus = #{recyclestatus,jdbcType=INTEGER},
+      RecycleBatch = #{recyclebatch,jdbcType=TIMESTAMP}
+    where FileID = #{fileid,jdbcType=CHAR}
+  </update>
+
+  <select id="findFileByFileId" parameterType="java.lang.String" resultMap="BaseResultMap">
+      select
+          FileName,
+          FileKey
+      from
+          cloud_projectfile
+      where
+          FileID = #{fileid,jdbcType=CHAR}
+  </select>
+
+  <select id="findFileIsExit" parameterType="cn.hassan.model.site.bimmodel.query.BimfileQuery" resultMap="BaseResultMap">
+      select
+          *
+      from
+          cloud_projectfile
+      where
+          FileMd5 = #{fileMd5,jdbcType=VARCHAR} and FileSize = #{fileSize,jdbcType=BIGINT}
+      order by AddTime
+      limit 1
+  </select>
+</mapper>

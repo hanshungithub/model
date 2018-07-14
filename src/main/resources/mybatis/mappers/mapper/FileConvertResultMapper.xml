@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.hassan.model.site.bimmodel.mapper.FileConvertResultMapper">
+  <resultMap id="BaseResultMap" type="cn.hassan.model.site.bimmodel.entity.FileConvertResult">
+    <id column="ConvertID" jdbcType="BIGINT" property="convertid" />
+    <result column="FileID" jdbcType="CHAR" property="fileid" />
+    <result column="FileTypeId" jdbcType="INTEGER" property="filetypeid" />
+    <result column="FileBucket" jdbcType="VARCHAR" property="filebucket" />
+    <result column="FileKey" jdbcType="VARCHAR" property="filekey" />
+    <result column="FileSize" jdbcType="BIGINT" property="filesize" />
+    <result column="FileMd5" jdbcType="VARCHAR" property="filemd5" />
+    <result column="AddTime" jdbcType="TIMESTAMP" property="addtime" />
+    <result column="AddUser" jdbcType="VARCHAR" property="adduser" />
+    <result column="ZipFileMd5" jdbcType="VARCHAR" property="zipfilemd5" />
+    <result column="IsZip" jdbcType="INTEGER" property="iszip" />
+    <result column="WorkType" jdbcType="INTEGER" property="worktype" />
+    <result column="ResultType" jdbcType="INTEGER" property="resulttype" />
+    <result column="RecycleStatus" jdbcType="INTEGER" property="recyclestatus" />
+    <result column="RecycleBatch" jdbcType="TIMESTAMP" property="recyclebatch" />
+  </resultMap>
+  <resultMap id="FileConvertResultMap" type="cn.hassan.model.site.bimmodel.entity.FileConvertResult">
+    <result column="ConvertID" jdbcType="BIGINT" property="convertid" />
+    <result column="FileID" jdbcType="CHAR" property="fileid" />
+    <result column="FileKey" jdbcType="VARCHAR" property="filekey" />
+    <result column="FileBucket" jdbcType="VARCHAR" property="filebucket" />
+    <result column="FileSize" jdbcType="BIGINT" property="filesize" />
+    <result column="FileMd5" jdbcType="VARCHAR" property="filemd5" />
+    <result column="ResultType" jdbcType="INTEGER" property="resulttype" />
+    <result column="FloorName" jdbcType="VARCHAR" property="floorName" />
+    <result column="FloorId" jdbcType="INTEGER" property="floorId" />
+    <result column="OrderId" jdbcType="INTEGER" property="orderId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ConvertID, FileID, FileTypeId, FileBucket, FileKey, FileSize, FileMd5, AddTime, AddUser, 
+    ZipFileMd5, IsZip, WorkType, ResultType, RecycleStatus, RecycleBatch
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from file_convertresult
+    where ConvertID = #{convertid,jdbcType=BIGINT}
+  </select>
+    <select id="findPBIMFileJsonListByFileId" resultMap="FileConvertResultMap" parameterType="cn.hassan.model.site.bimmodel.query.BimfileQuery">
+      SELECT
+      a.ConvertID,
+      a.FileID,
+      a.FileBucket,
+      a.FileKey,
+      a.FileSize,
+      a.FileMd5,
+      a.ResultType,
+      b.FloorName,
+      b.FloorId,
+      b.OrderId
+      FROM
+      FILE_CONVERTRESULT as a left join FILE_CONVERTFLOORSRESULT  as  b on a.ConvertID = b.ResultId
+      WHERE a.FileID = #{versionId:CHAR}
+      <if test="source==1">
+        and a.RecycleStatus = 0  and (a.ResultType = 2 or a.ResultType = 5 or a.ResultType = 6 or a.ResultType = 7 or a.ResultType = 9) and a.filekey is not null
+      </if>
+      <if test="source==2">
+        a.RecycleStatus = 0  and (a.ResultType = 2 or a.ResultType = 8) and a.filekey is not null
+      </if>
+      ORDER BY b.OrderId desc
+    </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from file_convertresult
+    where ConvertID = #{convertid,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="cn.hassan.model.site.bimmodel.entity.FileConvertResult">
+    insert into file_convertresult (ConvertID, FileID, FileTypeId, 
+      FileBucket, FileKey, FileSize, 
+      FileMd5, AddTime, AddUser, 
+      ZipFileMd5, IsZip, WorkType, 
+      ResultType, RecycleStatus, RecycleBatch
+      )
+    values (#{convertid,jdbcType=BIGINT}, #{fileid,jdbcType=CHAR}, #{filetypeid,jdbcType=INTEGER}, 
+      #{filebucket,jdbcType=VARCHAR}, #{filekey,jdbcType=VARCHAR}, #{filesize,jdbcType=BIGINT}, 
+      #{filemd5,jdbcType=VARCHAR}, #{addtime,jdbcType=TIMESTAMP}, #{adduser,jdbcType=VARCHAR}, 
+      #{zipfilemd5,jdbcType=VARCHAR}, #{iszip,jdbcType=INTEGER}, #{worktype,jdbcType=INTEGER}, 
+      #{resulttype,jdbcType=INTEGER}, #{recyclestatus,jdbcType=INTEGER}, #{recyclebatch,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="cn.hassan.model.site.bimmodel.entity.FileConvertResult">
+    insert into file_convertresult
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="convertid != null">
+        ConvertID,
+      </if>
+      <if test="fileid != null">
+        FileID,
+      </if>
+      <if test="filetypeid != null">
+        FileTypeId,
+      </if>
+      <if test="filebucket != null">
+        FileBucket,
+      </if>
+      <if test="filekey != null">
+        FileKey,
+      </if>
+      <if test="filesize != null">
+        FileSize,
+      </if>
+      <if test="filemd5 != null">
+        FileMd5,
+      </if>
+      <if test="addtime != null">
+        AddTime,
+      </if>
+      <if test="adduser != null">
+        AddUser,
+      </if>
+      <if test="zipfilemd5 != null">
+        ZipFileMd5,
+      </if>
+      <if test="iszip != null">
+        IsZip,
+      </if>
+      <if test="worktype != null">
+        WorkType,
+      </if>
+      <if test="resulttype != null">
+        ResultType,
+      </if>
+      <if test="recyclestatus != null">
+        RecycleStatus,
+      </if>
+      <if test="recyclebatch != null">
+        RecycleBatch,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="convertid != null">
+        #{convertid,jdbcType=BIGINT},
+      </if>
+      <if test="fileid != null">
+        #{fileid,jdbcType=CHAR},
+      </if>
+      <if test="filetypeid != null">
+        #{filetypeid,jdbcType=INTEGER},
+      </if>
+      <if test="filebucket != null">
+        #{filebucket,jdbcType=VARCHAR},
+      </if>
+      <if test="filekey != null">
+        #{filekey,jdbcType=VARCHAR},
+      </if>
+      <if test="filesize != null">
+        #{filesize,jdbcType=BIGINT},
+      </if>
+      <if test="filemd5 != null">
+        #{filemd5,jdbcType=VARCHAR},
+      </if>
+      <if test="addtime != null">
+        #{addtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="adduser != null">
+        #{adduser,jdbcType=VARCHAR},
+      </if>
+      <if test="zipfilemd5 != null">
+        #{zipfilemd5,jdbcType=VARCHAR},
+      </if>
+      <if test="iszip != null">
+        #{iszip,jdbcType=INTEGER},
+      </if>
+      <if test="worktype != null">
+        #{worktype,jdbcType=INTEGER},
+      </if>
+      <if test="resulttype != null">
+        #{resulttype,jdbcType=INTEGER},
+      </if>
+      <if test="recyclestatus != null">
+        #{recyclestatus,jdbcType=INTEGER},
+      </if>
+      <if test="recyclebatch != null">
+        #{recyclebatch,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.hassan.model.site.bimmodel.entity.FileConvertResult">
+    update file_convertresult
+    <set>
+      <if test="fileid != null">
+        FileID = #{fileid,jdbcType=CHAR},
+      </if>
+      <if test="filetypeid != null">
+        FileTypeId = #{filetypeid,jdbcType=INTEGER},
+      </if>
+      <if test="filebucket != null">
+        FileBucket = #{filebucket,jdbcType=VARCHAR},
+      </if>
+      <if test="filekey != null">
+        FileKey = #{filekey,jdbcType=VARCHAR},
+      </if>
+      <if test="filesize != null">
+        FileSize = #{filesize,jdbcType=BIGINT},
+      </if>
+      <if test="filemd5 != null">
+        FileMd5 = #{filemd5,jdbcType=VARCHAR},
+      </if>
+      <if test="addtime != null">
+        AddTime = #{addtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="adduser != null">
+        AddUser = #{adduser,jdbcType=VARCHAR},
+      </if>
+      <if test="zipfilemd5 != null">
+        ZipFileMd5 = #{zipfilemd5,jdbcType=VARCHAR},
+      </if>
+      <if test="iszip != null">
+        IsZip = #{iszip,jdbcType=INTEGER},
+      </if>
+      <if test="worktype != null">
+        WorkType = #{worktype,jdbcType=INTEGER},
+      </if>
+      <if test="resulttype != null">
+        ResultType = #{resulttype,jdbcType=INTEGER},
+      </if>
+      <if test="recyclestatus != null">
+        RecycleStatus = #{recyclestatus,jdbcType=INTEGER},
+      </if>
+      <if test="recyclebatch != null">
+        RecycleBatch = #{recyclebatch,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ConvertID = #{convertid,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.hassan.model.site.bimmodel.entity.FileConvertResult">
+    update file_convertresult
+    set FileID = #{fileid,jdbcType=CHAR},
+      FileTypeId = #{filetypeid,jdbcType=INTEGER},
+      FileBucket = #{filebucket,jdbcType=VARCHAR},
+      FileKey = #{filekey,jdbcType=VARCHAR},
+      FileSize = #{filesize,jdbcType=BIGINT},
+      FileMd5 = #{filemd5,jdbcType=VARCHAR},
+      AddTime = #{addtime,jdbcType=TIMESTAMP},
+      AddUser = #{adduser,jdbcType=VARCHAR},
+      ZipFileMd5 = #{zipfilemd5,jdbcType=VARCHAR},
+      IsZip = #{iszip,jdbcType=INTEGER},
+      WorkType = #{worktype,jdbcType=INTEGER},
+      ResultType = #{resulttype,jdbcType=INTEGER},
+      RecycleStatus = #{recyclestatus,jdbcType=INTEGER},
+      RecycleBatch = #{recyclebatch,jdbcType=TIMESTAMP}
+    where ConvertID = #{convertid,jdbcType=BIGINT}
+  </update>
+</mapper>
