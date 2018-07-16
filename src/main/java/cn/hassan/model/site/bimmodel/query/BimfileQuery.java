@@ -4,7 +4,6 @@ import lombok.Data;
 
 @Data
 public class BimfileQuery {
-    private String nodeId;
     private String fileId;
     private int source;
     private String fileName;
@@ -12,8 +11,7 @@ public class BimfileQuery {
     @Override
     public String toString() {
         return "BimfileQuery{" +
-                "nodeId='" + nodeId + '\'' +
-                ", fileId='" + fileId + '\'' +
+                "fileId='" + fileId + '\'' +
                 ", source=" + source +
                 '}';
     }
