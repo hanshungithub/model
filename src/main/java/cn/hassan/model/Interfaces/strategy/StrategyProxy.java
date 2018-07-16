@@ -22,16 +22,7 @@ public class StrategyProxy extends IStrategy{
 			method = targetEnty.getClass().getMethod(targetMethod, Map.class);
 			return (String) method.invoke(targetEnty, map);
 			
-		} catch (NoSuchMethodException e) {
-			log.error(e.getMessage());
-			throw new BoException(BOExceptionEnum.SYS_ERROR);
-		} catch (SecurityException e) {
-			log.error(e.getMessage());
-			throw new BoException(BOExceptionEnum.SYS_ERROR);
-		} catch (IllegalAccessException e) {
-			log.error(e.getMessage());
-			throw new BoException(BOExceptionEnum.SYS_ERROR);
-		} catch (IllegalArgumentException e) {
+		} catch (NoSuchMethodException | SecurityException | IllegalArgumentException | IllegalAccessException e) {
 			log.error(e.getMessage());
 			throw new BoException(BOExceptionEnum.SYS_ERROR);
 		} catch (InvocationTargetException e) {
