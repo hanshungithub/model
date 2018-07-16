@@ -24,13 +24,15 @@ public class Bimfile extends BaseObject {
 
 	private String fileExtension;
 
+	private Integer status;
+
 	public Bimfile(CloudProjectfile file) {
 		this.version_id = file.getFileid();
 		this.fileTypeId = file.getFiletypeid();
 		this.fileExtension = file.getFileextension();
 		this.convertResultDesc = file.getConvertresultdesc();
 		this.convertStatus = file.getConvertstatus() != 3;
-
+		this.status = file.getConvertstatus();
 	}
 
 	public boolean isDwg() {
@@ -94,5 +96,13 @@ public class Bimfile extends BaseObject {
 
 	public void setFileTypeId(Integer fileTypeId) {
 		this.fileTypeId = fileTypeId;
+	}
+
+	public Integer getStatus() {
+		return status;
+	}
+
+	public void setStatus(Integer status) {
+		this.status = status;
 	}
 }

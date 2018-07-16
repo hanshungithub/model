@@ -10,6 +10,7 @@ import cn.hassan.model.site.bimmodel.mapper.FileConvertResultMapper;
 import cn.hassan.model.site.bimmodel.mapper.FileConvertTaskMapper;
 import cn.hassan.model.site.bimmodel.query.BimfileQuery;
 import cn.hassan.model.site.bimmodel.vo.FileConvertResultWithSize;
+import cn.hassan.model.site.bimmodel.vo.ModelResultVo;
 import lombok.extern.slf4j.Slf4j;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +38,30 @@ public class BimfileService {
 
 	@Autowired(required = false)
 	private CloudProjectfileMapper cloudProjectfileMapper;
+
+	public ModelResultVo findModelInfo(BimfileQuery query) {
+		ModelResultVo vo = new ModelResultVo();
+		String fileId = query.getFileId();
+		if (StringUtil.isBlank(fileId)) {
+			throw new BoException(BOExceptionEnum.PARAM_ERROR);
+		}
+		List<FileConvertResult> resultList = fileConvertResultMapper.findPBIMFileJsonListByFileId(query);
+		List<FileConvertResult> results = new ArrayList<>();
+		List<FileConvertResult> resultsTen = new ArrayList<>();
+		for (FileConvertResult fileConvertResult: resultList) {
+			if (fileConvertResult.getResulttype() == 10) {
+				resultsTen.add(fileConvertResult);
+			}else {
+				results.add(fileConvertResult);
+			}
+			vo.setFileConvertResults(results);
+			vo.setFileConvertResultsSenior(resultsTen);
+		}
+
+		Bimfile bimfile = checkOptBimfileAuth(query);
+		vo.setConvertStatus(bimfile.getStatus());
+		return vo;
+	}
 
     public FileConvertResultWithSize bimfileConvertWithSize(BimfileQuery query) {
         String ossEndpoint = endpoint;

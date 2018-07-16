@@ -9,7 +9,8 @@ package cn.hassan.model.exception;
 public enum BOExceptionEnum {
 	
 	//--------------------------------------------------  基础 -----------------------------------------------------//
-	SYS_ERROR						("-10",  "系统异常，请稍候再试")
+	SYS_ERROR						("-10",  "系统异常，请稍候再试"),
+	PARAM_ERROR						("-11",  "缺少参数(fileId)")
     ;
 
 

@@ -5,6 +5,7 @@ import cn.hassan.model.Interfaces.strategy.IStrategy;
 import cn.hassan.model.site.bimmodel.query.BimfileQuery;
 import cn.hassan.model.site.bimmodel.service.BimfileService;
 import cn.hassan.model.site.bimmodel.vo.FileConvertResultWithSize;
+import cn.hassan.model.site.bimmodel.vo.ModelResultVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -31,7 +32,7 @@ public class ModelInterface extends IStrategy {
 		String fileId = getMapValue(map, InfParamEnum.fileId);
         BimfileQuery query = new BimfileQuery();
         query.setFileId(fileId);
-        FileConvertResultWithSize result = bimfileService.bimfileConvertWithSize(query);
-        return buildObjectToJson(result);
+		ModelResultVo modelInfo = bimfileService.findModelInfo(query);
+		return buildObjectToJson(modelInfo);
 	}
 }
