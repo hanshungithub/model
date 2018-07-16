@@ -54,7 +54,7 @@
       b.OrderId
       FROM
       FILE_CONVERTRESULT as a left join FILE_CONVERTFLOORSRESULT  as  b on a.ConvertID = b.ResultId
-      WHERE a.FileID = #{versionId:CHAR}
+      WHERE a.FileID = #{fileId:CHAR}
       <if test="source==1">
         and a.RecycleStatus = 0  and (a.ResultType = 2 or a.ResultType = 5 or a.ResultType = 6 or a.ResultType = 7 or a.ResultType = 9) and a.filekey is not null
       </if>

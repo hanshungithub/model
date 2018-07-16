@@ -13,7 +13,7 @@ public class BimfileQuery {
     public String toString() {
         return "BimfileQuery{" +
                 "nodeId='" + nodeId + '\'' +
-                ", versionId='" + fileId + '\'' +
+                ", fileId='" + fileId + '\'' +
                 ", source=" + source +
                 '}';
     }

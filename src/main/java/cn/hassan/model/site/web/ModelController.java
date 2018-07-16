@@ -31,6 +31,7 @@ public class ModelController {
 	@ApiImplicitParam(name = "fileId", value = "文件Id(上传后返回的fileId)", required = true)
 	@PostMapping("/front/bimfile/modelConstructInfoCors.htm")
     public JSONObject modelConstructInfoCors(BimfileQuery query) {
+		query.setFileId("a90600e7-1f49-2c91-8083-01312615b77a");
         JSONObject jsonObject = new JSONObject();
         if(StringUtils.isEmpty(query.getFileId())){
 			throw new BoException(BOExceptionEnum.SYS_ERROR);
