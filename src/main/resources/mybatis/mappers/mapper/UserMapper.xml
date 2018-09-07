@@ -105,9 +105,9 @@
     <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into user (passward, username, birthday, 
+    insert into user (password, username, birthday,
       sex, address)
-    values (#{passward,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, #{birthday,jdbcType=DATE}, 
+    values (#{password,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, #{birthday,jdbcType=DATE},
       #{sex,jdbcType=CHAR}, #{address,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="cn.hassan.model.site.user.bean.User" >

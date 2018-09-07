@@ -65,4 +65,9 @@ public class UserController {
     public void mqTest() {
         producer.send("hassan",DestinationEnums.SEND_USER_DESTINATION.value());
     }
+
+	@RequestMapping(value="/user/add", method=RequestMethod.GET)
+	public void addUser() {
+		service.saveUser();
+	}
 }
