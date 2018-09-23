@@ -14,11 +14,19 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Component
 public class MvcConfigs implements WebMvcConfigurer {
 
+    /**
+     * 添加静态网页映射
+     * @param registry
+     */
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
         registry.addViewController("/upload.html").setViewName("upload");
     }
 
+    /**
+     * 添加静态资源映射
+     * @param registry
+     */
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/static/**").addResourceLocations("classpath:/static/");
