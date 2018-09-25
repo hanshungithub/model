@@ -30,7 +30,7 @@ public class UserService {
 		user.setUsername("hassan");
 		user.setAddress("hangzhou");
 		user.setBirthday(new Date());
-		user.setPassword("123");
+		user.setPassward("123");
 		user.setSex("1");
 		userMapper.insert(user);
 

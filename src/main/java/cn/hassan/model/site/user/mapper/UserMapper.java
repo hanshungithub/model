@@ -1,11 +1,9 @@
 package cn.hassan.model.site.user.mapper;
 
-
 import cn.hassan.model.site.user.bean.User;
 import cn.hassan.model.site.user.bean.UserExample;
-import org.apache.ibatis.annotations.Param;
-
 import java.util.List;
+import org.apache.ibatis.annotations.Param;
 
 public interface UserMapper {
     int countByExample(UserExample example);
