@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
  * Date: 9/23/2018 9:38 PM
  * Description: Spring允许在Bean创建之前，读取Bean的元属性，并根据自己的需求对元属性进行改变，比如将Bean的scope从singleton改变为prototype
  */
-@Component
+//@Component
 @Slf4j
 public class MyBeanFactoryPostProcessor implements BeanFactoryPostProcessor {
 
